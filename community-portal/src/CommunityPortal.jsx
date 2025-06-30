@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import { User, MessageSquare, ThumbsUp, ThumbsDown, Plus, Shield, X, LogIn, UserPlus, LogOut, ExternalLink } from 'lucide-react';
-import './CommunityPortal.css'
-
+import { useState } from 'react';
+import { FaGoogle } from "react-icons/fa";
+import { Lock, User, MessageSquare, ThumbsUp, ThumbsDown, Plus, Shield, X, LogIn, UserPlus, LogOut, ExternalLink } from 'lucide-react';
+import './CommunityPortal.css';
 function CommunityPortal() {
   const [showLogin,setshowLogin] = useState(false);
   const [showRegister,setshowRegister] = useState(false);
@@ -37,9 +37,9 @@ function CommunityPortal() {
         
         {showLogin && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="relative bg-[#EEEEEE] rounded-lg shadow-sm bg-white-700">
+            <div className="bg-[#EEEEEE] rounded-lg max-w-md w-full p-6">
               
-              <div className="flex justify-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4">
               <h2 className="text-xl font-semibold">Login</h2>
               <button
                onClick={() => setshowLogin(false)}
@@ -48,7 +48,50 @@ function CommunityPortal() {
                 <X className="h-5 w-5 text-gray-500"></X>
               </button>
               </div>
-        
+            <div className="space-y-4">
+              <div>
+                <label
+                 className="block flex text-sm"
+                 >
+
+                  Username</label>
+              </div>
+              <div>
+                <input
+                 className="w-full border-2 border-gray-400 px-3 py-2 rounded-md focus:border-blue-500 focus:outline-none"
+                 placeholder='Enter Username'
+                 ></input>
+              </div>
+
+              <div>
+                <label
+                 className="block flex text-sm"
+                 >
+                  Password</label>
+              </div>
+
+              <div>
+                    <input
+                 className="w-full border-2 border-gray-400 px-3 py-2 rounded-md focus:border-blue-500 focus:outline-none"
+                 placeholder='Enter Username'
+                 ></input>
+              </div>
+            </div>
+            <div className="flex item-center justify-start space-x-2 mt-4">
+
+            <button
+                  className="flex-1 bg-[#2A4759] text-white py-2 px-4 rounded"
+                  >
+                    Login
+                </button>
+
+            <button
+                  className="flex flex-1 items-center gap-2 bg-[#F79B72] text-white py-2 px-4 rounded"
+                  >
+                    <FaGoogle className="w-4 h-4"></FaGoogle>
+                    Login with Google
+                </button>
+            </div>
             </div>
           </div>
 
