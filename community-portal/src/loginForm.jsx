@@ -16,12 +16,9 @@ function LoginForm({ show, onClose, newUser }) {
         await signInWithEmailAndPassword(auth,email,password);
         const user = auth.currentUser;
         if(!user)
-        {
             alert("Wrong Combination");
-        }
         else
         {
-            
             newUser(user);
             onClose();
         }
@@ -46,6 +43,7 @@ function LoginForm({ show, onClose, newUser }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+      hello
       <div className="bg-[#EEEEEE] rounded-lg max-w-md w-full p-6">
 
         <div className="flex items-center justify-between mb-4">
@@ -106,6 +104,7 @@ function LoginForm({ show, onClose, newUser }) {
         </div>
         </form>
       </div>
+     
     </div>
   );
 }
