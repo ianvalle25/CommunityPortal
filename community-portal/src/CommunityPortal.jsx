@@ -15,6 +15,7 @@ function CommunityPortal() {
 
 
   useEffect(() => {
+    //sample posts to display on screen
     const samplePosts = [
       {
         id: 1,
@@ -39,9 +40,9 @@ function CommunityPortal() {
       {
         id: 3,
         title: "What's your favorite programming language?",
-        content: "I'm curious to hear what languages everyone enjoys working with and why!",
+        content: "",
         link: "",
-        author: "coder_enthusiast",
+        author: "user123",
         votes: 8,
         userVote: null,
         timestamp: Date.now() - 10800000
@@ -50,9 +51,10 @@ function CommunityPortal() {
     setPosts(samplePosts);
   }, []);
 
-
+  //creates new posts
   const createPost = (e) => {
     e.preventDefault();
+    //checks if there is a user and check if the user inputed a title
     if(!user || !info.title)
       return;
 
@@ -67,11 +69,14 @@ function CommunityPortal() {
       timestamp: Date.now()
     }
 
+    //add new post at the top
     setPosts(prev => [post, ...prev]);
+    //reset form state
     setInfo({ title: '', content: '', link: '' });
     setShowNewPost(false);
   }
 
+  //handle vote functionality
   const handleVotes = (postId, voteType) => {
     if(!user)
       return;
@@ -81,11 +86,14 @@ function CommunityPortal() {
         let newVotes = post.votes;
         let newUserVote = voteType;
 
+        // toglle the vote off if the user already voted the same way
         if (post.userVote === voteType) {
           newUserVote = null;
           newVotes += voteType === 'up' ? -1 : 1;
+        //switches the votes if the user already voted
         } else if (post.userVote) {
           newVotes += voteType === 'up' ? 2 : -2;
+        //first vote
         } else {
           newVotes += voteType === 'up' ? 1 : -1;
         }
@@ -96,9 +104,10 @@ function CommunityPortal() {
     }));
 
   }
-
+  //sort posts by vote
   const sortedPosts = [...posts].sort((a, b) => b.votes - a.votes);
 
+  //formate the time difference
   const formatTimeAgo = (timestamp) => {
     const diff = Date.now() - timestamp;
     const hours = Math.floor(diff / 3600000);
@@ -165,7 +174,7 @@ function CommunityPortal() {
            {showNewPost && (
               <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
                 <div className="bg-[#EEEEEE] rounded-lg max-w-md w-full p-6">
-                 <div className="flex items-center justify-between mb-4">
+                 <div className="flex justify-between mb-4">
                   <h2 className="text-xl font-semibold">Create New Post</h2>
                    <button
                     onClick={() => setShowNewPost(false)}
@@ -240,7 +249,7 @@ function CommunityPortal() {
         {sortedPosts.map(post => (
         <div key={post.id} className="flex drop-shadow-sm rounded-md bg-[#EEEEEE] mt-3 max-w-4xl mx-auto px-4 py-6 space-x-4">
           <div className = "flex items-start space-x-3">
-          <div className="flex flex-col items-center space-y-0.5">
+          <div className="flex flex-col space-y-0.5">
             <button
               onClick={() => handleVotes(post.id, 'up')}
               className={`p-1 rounded ${

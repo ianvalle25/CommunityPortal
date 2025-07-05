@@ -12,16 +12,20 @@ function RegisterForm({show, onClose, newUser}){
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        //checks if the user's passwords are matching
         if( password !== matchingPassword)
         {
             alert("Passwords do not match.")
             return;
         }
         
+
         try {
+          //sends info to the firebase
           await createUserWithEmailAndPassword(auth, email, password);
           const user = auth.currentUser;
           
+          //if user created a new account the close modal
           if(user)
           {
             newUser(user);
